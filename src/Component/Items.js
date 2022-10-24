@@ -1,23 +1,43 @@
-//Summary This JS gets all the from  the list
-
+import React from "react";
 import {Button} from "@mui/material";
 
 
-function GetAllItems()
-{
+
+function Items(props) {
     //Use State
 
     //Use Effect
 
     //Custom Methods
+    function fetchAllTodoList() {
+        fetch("http://localhost:3001/api/items")
+            .then(response => {
+                return response.json()
+            })
+            .then(data => {
+                return props.setAllItem(data);
+            })
+    }
+
+        //Main
 
 
-    //Main
-    return (
-        <>
-            <Button onClick={() => {console.log("Button in all was clicked")}}>Get All Items</Button>
-        </>
-    )
+        return (
+            <>
+                <Button onClick={fetchAllTodoList}>Get All Items</Button>
+                {props.allItem.map((item) =>{
+                  const {id,content, completed } = item;
+                return (
+                    <div key={id}>
+                        <p>id: {id}</p>
+                        <p>content: {content}</p>
+                        <p>completed: {completed}</p>
+                        <br/>
+                    </div>
+                )
+                })}
+            </>
+        )
 }
 
-export default GetAllItems
+export default Items
