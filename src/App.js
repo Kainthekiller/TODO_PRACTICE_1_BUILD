@@ -17,7 +17,7 @@ function App() {
 useEffect(() =>
 {
 document.title = "Hello Phil"
-}, [allItems])
+}, [])
 
 
     //Custom Methods

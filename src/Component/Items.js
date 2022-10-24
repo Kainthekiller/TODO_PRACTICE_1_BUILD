@@ -9,7 +9,7 @@ function Items(props) {
     //Use Effect
 
     //Custom Methods
-    function fetchAllTodoList() {
+    async function  fetchAllTodoList() {
         fetch("http://localhost:3001/api/items")
             .then(response => {
                 return response.json()

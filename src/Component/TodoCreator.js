@@ -2,14 +2,22 @@ import React, {useState} from "react";
 import {Button} from "@mui/material";
 
 
-function TodoCreator()
+function TodoCreator(props)
 {
     //Use State
     const [id, setID] = useState("")
     const [content, setContent] = useState("")
     const [completedStatus, setCompletedStatus] = useState(false)
     //Custom Method
-
+    async function  fetchAllTodoList() {
+        fetch("http://localhost:3001/api/items")
+            .then(response => {
+                return response.json()
+            })
+            .then(data => {
+                return props.setAllItem(data);
+            })
+    }
     function postTodo(e)
     {
         e.preventDefault();
@@ -32,6 +40,7 @@ function TodoCreator()
             })
             .then(() => {
                 setContent("")
+                fetchAllTodoList()
             })
             .catch((e) => {
                 console.error(e)
