@@ -2,7 +2,7 @@ import React from "react";
 import {Button} from "@mui/material";
 
 
-
+//Items: Renders all Item components
 function Items(props) {
     //Use State
 
@@ -31,7 +31,7 @@ function Items(props) {
                     <div key={id}>
                         <p>id: {id}</p>
                         <p>content: {content}</p>
-                        <p>completed: {completed}</p>
+                        <p>completed: {completed.toString()}</p>
                         <br/>
                     </div>
                 )
