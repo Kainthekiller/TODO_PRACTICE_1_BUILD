@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Button, Select} from "@mui/material";
+import {Button, Checkbox, Select} from "@mui/material";
 import DropdownList from "react-widgets/DropdownList";
 import {useHandleSelect} from "react-widgets/List";
 
@@ -8,7 +8,7 @@ function UpdateItem(props)
     //Use State
     const [id, setID] = useState(0)
     const [content, setContent] = useState("")
-    const [completedStatus, setCompletedStatus] = useState(Boolean)
+    const [completedStatus, setCompletedStatus] = useState(false)
 
     //Custom Method
     function fetchAllTodoList() {
@@ -37,8 +37,8 @@ function patchRequest(e)
             method: "PATCH",
             body: JSON.stringify({
 
-            content: content
-
+            content: content,
+                completed: completedStatus
 
             }),
             headers: {
@@ -53,11 +53,10 @@ function patchRequest(e)
                 console.log(completedStatus)
             })
     }
-    const options = [
-        { value: true, label: "True" },
-        { value: true, label: "True" },
-        { value: true, label: "True" }
-    ];
+
+    function changeStatus(e) {
+        setCompletedStatus(e.target.value);
+    }
     //Main
 
     return (
@@ -74,7 +73,7 @@ function patchRequest(e)
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                 />
-
+                <input type="checkbox" onChange={(e) => setCompletedStatus(e.target.checked) }/>Completed?
 
             </form>
             <Button onClick={(e) => {patchRequest(e, id)}}>Update Item</Button>
